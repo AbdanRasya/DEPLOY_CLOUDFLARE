@@ -1,6 +1,7 @@
 /**
- * AESTHETIC MINIMALIST PORTFOLIO
- * Vanilla JavaScript (ES6+) — Clean Micro-interactions
+ * ABDAN RASYA — SCRIPT.JS
+ * Vanilla JavaScript (ES6+)
+ * Compatible with Cloudflare Workers Static Assets
  */
 
 (function () {
@@ -13,32 +14,28 @@
       title: 'Kolektif Jurnal — Platform Baca Minimalis',
       desc: 'Sebuah eksplorasi arsitektur web editorial yang berfokus pada pengalaman membaca tanpa gangguan (distraction-free reading). Dibangun dengan struktur semantik murni, hierarki tipografi berimbang, dan sistem tema dinamis.',
       tags: ['HTML5 Semantic', 'CSS Grid', 'Vanilla JS', 'Local Storage', 'Typography'],
-      year: '2026',
-      demoUrl: '#projects'
+      year: '2026'
     },
     '2': {
       category: 'AUDIO & DSP // WEB APP',
       title: 'Aether // Ambient Sound Generator',
       desc: 'Generator audio sintetis procedural untuk fokus dan meditasi. Menggunakan Web Audio API native tanpa sampel suara eksternal, dilengkapi oscilloscope visualizer interaktif berbasis Canvas 2D.',
       tags: ['Web Audio API', 'Canvas 2D', 'Procedural Math', 'Sound Synthesis'],
-      year: '2026',
-      demoUrl: '#projects'
+      year: '2026'
     },
     '3': {
       category: 'UI/UX // DESIGN SYSTEM',
       title: 'Kura — Minimal UI Design System',
       desc: 'Koleksi komponen UI monokromatis dan modular untuk aplikasi produktivitas. Dirancang dengan panduan aksesibilitas WCAG AA, rasio kontras tinggi, dan kurva interaksi yang halus.',
       tags: ['Figma', 'Design System', 'Tokens', 'Accessibility', 'Interaction'],
-      year: '2025',
-      demoUrl: '#projects'
+      year: '2025'
     },
     '4': {
       category: 'FRONTEND // E-COMMERCE',
       title: 'Studio Keramik — Objek Seni Artisan',
       desc: 'Etalase digital interaktif untuk studio keramik lokal. Mengedepankan transisi gambar yang halus, performa cepat pada perangkat seluler, dan micro-interactions pada keranjang belanja.',
-      tags: ['Responsive Web', 'CSS Animations', 'Modern JS', 'Image Optimization'],
-      year: '2025',
-      demoUrl: '#projects'
+      tags: ['Responsive Web', 'CSS Animations', 'Modern JS', 'Edge Static'],
+      year: '2025'
     }
   };
 
@@ -50,6 +47,10 @@
   const toastEl = document.getElementById('toast');
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
+
+  // Verification elements from practice module
+  const cekBtn = document.getElementById('cek');
+  const hasilEl = document.getElementById('hasil');
 
   // Modal Elements
   const detailModal = document.getElementById('detailModal');
@@ -65,7 +66,21 @@
   let toastTimeout = null;
 
   /**
-   * 1. Theme Management (Light / Dark)
+   * 1. Cloudflare Verification Check (Sesuai Modul Praktikum)
+   */
+  function initCloudflareCheck() {
+    if (!cekBtn || !hasilEl) return;
+
+    cekBtn.addEventListener('click', () => {
+      const now = new Date().toLocaleTimeString('id-ID');
+      hasilEl.textContent = `✓ JavaScript berhasil berjalan di browser (${now} WIB).`;
+      hasilEl.style.color = '#10b981';
+      showToast('Verifikasi sukses: Client-side JS aktif!');
+    });
+  }
+
+  /**
+   * 2. Theme Management (Light / Dark)
    */
   function initTheme() {
     const savedTheme = localStorage.getItem('theme-preference');
@@ -86,14 +101,13 @@
   }
 
   /**
-   * 2. Live Local Clock (WIB / Jakarta Time)
+   * 3. Live Local Clock (WIB / Jakarta Time)
    */
   function startLiveClock() {
     if (!liveClockEl) return;
 
     function update() {
       const now = new Date();
-      // Format to GMT+7 (Asia/Jakarta)
       const options = {
         timeZone: 'Asia/Jakarta',
         hour12: false,
@@ -110,7 +124,7 @@
   }
 
   /**
-   * 3. Toast Notifications
+   * 4. Toast Notifications
    */
   function showToast(message) {
     if (!toastEl) return;
@@ -125,16 +139,16 @@
   }
 
   /**
-   * 4. Copy Email to Clipboard
+   * 5. Copy Email to Clipboard
    */
   function initCopyEmail() {
     if (!copyEmailBtn) return;
 
     copyEmailBtn.addEventListener('click', () => {
-      const email = 'rasya@example.com';
+      const email = 'abdanrasya@example.com';
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(email)
-          .then(() => showToast('✓ Alamat email berhasil disalin!'))
+          .then(() => showToast('✓ Alamat email berhasil disalin ke clipboard!'))
           .catch(() => showToast(`Email: ${email}`));
       } else {
         showToast(`Email: ${email}`);
@@ -143,9 +157,11 @@
   }
 
   /**
-   * 5. Project Filtering
+   * 6. Project Filtering
    */
   function initProjectFilter() {
+    if (filterBtns.length === 0) return;
+
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -171,7 +187,7 @@
   }
 
   /**
-   * 6. Project Detail Modal
+   * 7. Project Detail Modal
    */
   function openProjectModal(projectId) {
     const data = PROJECTS_DATA[projectId];
@@ -193,13 +209,15 @@
 
     modalActionBtn.onclick = () => {
       detailModal.close();
-      showToast(`Membuka demonstrasi: ${data.title}`);
+      showToast(`Melihat detail: ${data.title}`);
     };
 
     detailModal.showModal();
   }
 
   function initDetailModal() {
+    if (!detailModal) return;
+
     // Buttons inside cards
     document.querySelectorAll('.view-detail-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -210,26 +228,20 @@
     });
 
     // Close actions
-    if (modalCloseBtn) {
-      modalCloseBtn.addEventListener('click', () => detailModal.close());
-    }
-    if (modalDismissBtn) {
-      modalDismissBtn.addEventListener('click', () => detailModal.close());
-    }
+    if (modalCloseBtn) modalCloseBtn.addEventListener('click', () => detailModal.close());
+    if (modalDismissBtn) modalDismissBtn.addEventListener('click', () => detailModal.close());
 
-    // Click outside modal backdrop to close
-    if (detailModal) {
-      detailModal.addEventListener('click', (e) => {
-        const rect = detailModal.getBoundingClientRect();
-        const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-                            rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-        if (!isInDialog) detailModal.close();
-      });
-    }
+    // Click outside backdrop to close
+    detailModal.addEventListener('click', (e) => {
+      const rect = detailModal.getBoundingClientRect();
+      const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                          rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
+      if (!isInDialog) detailModal.close();
+    });
   }
 
   /**
-   * 7. Contact Form Handling
+   * 8. Contact Form Handling
    */
   function initContactForm() {
     if (!contactForm) return;
@@ -246,16 +258,14 @@
         return;
       }
 
-      // Show success feedback
-      showToast(`Terima kasih ${name}, pesan Anda telah terkirim!`);
+      showToast(`Terima kasih ${name}, pesan Anda telah dicatat!`);
       contactForm.reset();
     });
   }
 
-  /**
-   * Document Ready Initialization
-   */
+  // Document Ready
   document.addEventListener('DOMContentLoaded', () => {
+    initCloudflareCheck();
     initTheme();
     startLiveClock();
     initCopyEmail();

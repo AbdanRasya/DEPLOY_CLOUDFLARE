@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Saya — Abdan Rasya</title>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo">
+        <span class="logo-mark">●</span>
+        <span class="logo-text">rasya.workers.dev</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Beranda</a>
+        <a href="about.html" class="nav-link active" style="color: var(--text-primary); font-weight: 600;">Tentang Saya</a>
+        <a href="index.html#projects" class="nav-link">Karya</a>
+        <a href="index.html#contact" class="nav-link">Kontak</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="local-time" title="Waktu Lokal (WIB)">
+          <span class="time-label">JKT</span>
+          <span id="liveClock" class="time-val">--:--:--</span>
+        </div>
+
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Ganti Tema">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="hero-section">
+      <div class="hero-badge">
+        <span class="status-pulse"></span>
+        <span>Dokumentasi Mandiri // Profil Mahasiswa</span>
+      </div>
+
+      <h1 class="hero-title">
+        Sekilas tentang <span class="italic-serif">Abdan Rasya</span> dan eksplorasi teknologi web.
+      </h1>
+
+      <div class="about-content-grid">
+        <div class="about-text-block">
+          <p class="about-paragraph">
+            Saya adalah seorang mahasiswa dengan minat mendalam pada pengembangan frontend web, sistem antarmuka terdistribusi, dan arsitektur komputasi awan (Cloud Platform as a Service).
+          </p>
+          <p class="about-paragraph">
+            Website ini dirancang secara khusus untuk memenuhi tugas praktikum <strong>Deployment Website Statis ke Cloudflare Workers</strong> pada mata kuliah pemrograman dan infrastruktur PaaS.
+          </p>
+          
+          <h3 class="about-subheading">Prinsip Pengembangan:</h3>
+          <ul class="about-principles">
+            <li><strong>Zero Bloat:</strong> Menggunakan Vanilla HTML, CSS, dan JavaScript tanpa ketergantungan framework berlebihan.</li>
+            <li><strong>Edge Delivery:</strong> Menyajikan aset statis langsung melalui jaringan edge Cloudflare global untuk latensi minimal.</li>
+            <li><strong>Git-Driven CI/CD:</strong> Setiap perubahan yang di-push ke branch <code>main</code> memicu deployment otomatis melalui Workers Builds.</li>
+          </ul>
+
+          <div style="margin-top: 2rem;">
+            <a href="index.html" class="btn btn-primary">← Kembali ke Beranda</a>
+          </div>
+        </div>
+
+        <div class="about-aside-card">
+          <span class="aside-tag">INFORMASI PRAKTIKUM</span>
+          <div class="aside-row">
+            <span class="aside-label">Nama Siswa</span>
+            <span class="aside-val">Abdan Rasya</span>
+          </div>
+          <div class="aside-row">
+            <span class="aside-label">Platform PaaS</span>
+            <span class="aside-val">Cloudflare Workers</span>
+          </div>
+          <div class="aside-row">
+            <span class="aside-label">Metode Deploy</span>
+            <span class="aside-val">Git → Workers Builds</span>
+          </div>
+          <div class="aside-row">
+            <span class="aside-label">Assets Directory</span>
+            <span class="aside-val">./public</span>
+          </div>
+          <div class="aside-row">
+            <span class="aside-label">Domain Publik</span>
+            <span class="aside-val text-green">*.workers.dev</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">
+        © 2026 Abdan Rasya — Cloudflare Workers Static Assets.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Beranda</a>
+        <span class="footer-bullet">•</span>
+        <a href="404.html">404 Page</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
